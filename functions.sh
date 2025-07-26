@@ -190,14 +190,22 @@ function shhp_should_take_damage() {
     return 1  # No damage taken
 }
 
+function shhp_die() {
+    >&2 echo "You died!"
+    # Kill the parent shell.
+    kill $(ps -o ppid= $$)
+}
+
 function shhp_ps1_hook() {
     if shhp_should_take_damage; then
         >&2 printf "You took %s1 damage%s (last command failed: %s)\n" \
             "$(shhp_color red)" "$(shhp_color reset)" "${SHHP_LAST_COMMAND}"
-        # >&2 echo "Taking damage for last command: ${SHHP_LAST_COMMAND}"
         shhp_damage
     fi
     shhp_print_hp
+    if (( $(shhp_hp) <= 0 )); then
+        shhp_die
+    fi
 }
 
 PS1="\$(shhp_ps1_hook) > "
