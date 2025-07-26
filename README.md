@@ -29,6 +29,9 @@ shhp_heal [AMOUNT]
 
 # Overheals (Zelda BOTW rules) by the specified amount, giving you extra hearts.
 shhp_overheal [AMOUNT]
+
+# Prints the current hitpoints
+shhp_hp
 ```
 
 ## But why?
