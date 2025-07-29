@@ -124,8 +124,8 @@ function shhp_overheal() {
         amount="$1"
     fi
 
-    if (( $(shhp_hp) < SHHP_MAX_HP + amount )); then
-        SHHP_HP=$(( SHHP_MAX_HP + amount ))
+    if (( $(shhp_hp) < ( SHHP_MAX_HP + amount ) )); then
+        shhp_hp $(( SHHP_MAX_HP + amount )) > /dev/null
     fi
 }
 
